@@ -33,7 +33,7 @@ jobs:
         id: detect-package-manager
         working-directory: projectpage
         run: |
-          if [ -f "/yarn.lock" ]; then
+          if [ -f "${{ dir }}/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
