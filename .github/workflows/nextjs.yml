@@ -37,12 +37,12 @@ jobs:
         id: detect-package-manager
         working-directory: projectpage
         run: |
-          if [ -f "${{ github.workflow }}/projectpage/yarn.lock" ]; then
+          if [ -f "/projectpage/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
             exit 0
-          elif [ -f "${{ github.workflow }}/projectpage/package.json" ]; then
+          elif [ -f "/projectpage/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
