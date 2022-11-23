@@ -27,12 +27,14 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./project-page
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Detect package manager
         id: detect-package-manager
-        working-directory: ./project-page
         run: |
           if [ -f "${{ github.workspace }}/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
@@ -59,6 +61,7 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v3
         with:
+          working-directory: ./project-page
           path: |
             .next/cache
           # Generate a new cache whenever packages or source files change.
@@ -67,17 +70,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
-        working-directory: ./project-page
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
-        working-directory: ./project-page
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Static HTML export with Next.js
-        working-directory: ./project-page
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
+          working-directory: ./project-page
           path: ./out
 
   # Deployment job
