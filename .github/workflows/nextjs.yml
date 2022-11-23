@@ -54,6 +54,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
+          working-directory: projectpage
           node-version: "16"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
@@ -64,9 +65,11 @@ jobs:
           #
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
+          working-directory: projectpage
       - name: Restore cache
         uses: actions/cache@v3
         with:
+          working-directory: projectpage
           path: |
             .next/cache
           # Generate a new cache whenever packages or source files change.
@@ -83,6 +86,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
+          working-directory: projectpage
           path: ./out
 
   # Deployment job
