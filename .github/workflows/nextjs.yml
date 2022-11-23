@@ -22,6 +22,10 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: true
+  
+defaults:
+  run:
+    working-directory: projectpage
 
 jobs:
   # Build job
@@ -33,12 +37,12 @@ jobs:
         id: detect-package-manager
         working-directory: projectpage
         run: |
-          if [ -f "${{ dir }}/yarn.lock" ]; then
+          if [ -f "${{ github.workflow }}/projectpage/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
             exit 0
-          elif [ -f "/package.json" ]; then
+          elif [ -f "${{ github.workflow }}/projectpage/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
