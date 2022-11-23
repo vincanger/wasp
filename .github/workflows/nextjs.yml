@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: wasp/project-page
+        working-directory: project-page
     steps:
       - name: Checkout
         uses: actions/checkout@v3
