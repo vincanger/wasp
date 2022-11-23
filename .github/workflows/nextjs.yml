@@ -61,7 +61,7 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v3
         with:
-          working-directory: ./project-page
+          working-directory: project-page/
           path: |
             .next/cache
           # Generate a new cache whenever packages or source files change.
