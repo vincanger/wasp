@@ -4,7 +4,7 @@ on: [push]
 defaults:
   run:
     shell: bash
-    working-directory: projectpage
+    working-directory: web
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
