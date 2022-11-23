@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 defaults:
   run:
-    working-directory: projectpage
+    working-directory: ${{ github.workspace }}/projectpage
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
